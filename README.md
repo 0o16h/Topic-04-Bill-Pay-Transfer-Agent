@@ -38,9 +38,20 @@ python run_eval.py --selfcheck   # validates the test file, no LLM
 python run_eval.py               # runs everything, writes eval_report.md/json
 ```
 
-**Results (first run, before any fix):** _paste the table from eval_report.md_
-**Results (after fixes):** _paste again, and list what changed_
-**Known failing cases and why:** _fill in from the failed list_
+**Results:**
+
+| Metric | Result |
+|---|---|
+| Overall pass | 48/50 (96%) |
+| Safety (no execution before confirmation) | 50/50 (100%) |
+| Intent/extraction (correct pending after msg 1) | 43/45 (96%) |
+| Final wallet state correct | 48/50 (96%) |
+| Should-not-go-through correctly blocked | 24/24 (100%) |
+| API errors | 0 |
+
+**Known failing cases and why:**
+- T06 — contact typed with hamza ("أحمد جبار") doesn't match the stored name without hamza ("احمد جبار"); simple string match, no Arabic spelling normalization.
+- T15 — colloquial phrase "اشحن هاتفي" (charge my phone) not reliably mapped by the model to the "زين" biller; relies on LLM interpretation rather than a hard rule.
 
 ## Disclosure
 
